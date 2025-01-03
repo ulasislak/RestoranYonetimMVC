@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Ekle</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            text-align: center;
+            color: #dc3545; /* Kırmızı renk */
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .form-label {
+            color: #fd7e14; /* Turuncu renk */
+            font-weight: bold;
+        }
+
+        .form-control:focus {
+            border-color: #fd7e14;
+            box-shadow: 0 0 5px rgba(253, 126, 20, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+            .btn-primary:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+
+        .image-preview {
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none; /* Başlangıçta gizli */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="form-title">Yeni Ürün Ekle</h2>
+        <form>
+            <!-- Ürün Adı -->
+            <div class="mb-3">
+                <label for="Name" class="form-label">Ürün Adı</label>
+                <input type="text" class="form-control" id="Name" placeholder="Ürün adını girin">
+            </div>
+
+            <!-- İçindekiler -->
+            <div class="mb-3">
+                <label for="Ingredient" class="form-label">İçindekiler</label>
+                <textarea class="form-control" id="Ingredient" rows="3" placeholder="İçindekileri girin"></textarea>
+            </div>
+
+            <!-- Fiyat -->
+            <div class="mb-3">
+                <label for="Price" class="form-label">Fiyat</label>
+                <input type="number" class="form-control" id="Price" placeholder="Fiyat girin">
+            </div>            
+
+            <!-- Resim Seçme -->
+            <div class="mb-3">
+                <label for="imageUpload" class="form-label">Resim Seç</label>
+                <input type="file" class="form-control" id="imageUpload" accept="image/*">
+                <img id="imagePreview" src="#" alt="Resim Önizleme" class="image-preview">
+            </div>
+
+            <!-- Gönder Butonu -->
+            <button type="submit" class="btn btn-primary">Ürünü Ekle</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap 5 JS (Popper.js olmadan) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Resim Önizleme için JavaScript -->
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
+            const file = event.target.files[0]; // Seçilen dosya
+            const reader = new FileReader(); // Dosya okuma nesnesi
+
+            // Dosya okunduğunda çalışacak fonksiyon
+            reader.onload = function (e) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = e.target.result; // Resmi önizleme alanına yerleştir
+                imagePreview.style.display = 'block'; // Önizleme alanını göster
+            };
+
+            // Dosyayı oku
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

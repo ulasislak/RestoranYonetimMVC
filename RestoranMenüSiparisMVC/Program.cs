@@ -1,4 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RestoranMenüSiparisMVC.Areas.Identity.Data;
+using RestoranMenüSiparisMVC.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("RestoranMenüSiparisMVCContextConnection") ?? throw new InvalidOperationException("Connection string 'RestoranMenüSiparisMVCContextConnection' not found.");
+
+builder.Services.AddDbContext<RestoranMenüSiparisMVCContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<RestoranMenüSiparisMVCUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<RestoranMenüSiparisMVCContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
