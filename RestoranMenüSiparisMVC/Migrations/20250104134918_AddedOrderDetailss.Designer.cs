@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestoranMenüSiparisMVC.Data;
 
@@ -11,9 +12,11 @@ using RestoranMenüSiparisMVC.Data;
 namespace RestoranMenüSiparisMVC.Migrations
 {
     [DbContext(typeof(RestoranMenüSiparisMVCContext))]
-    partial class RestoranMenüSiparisMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20250104134918_AddedOrderDetailss")]
+    partial class AddedOrderDetailss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,32 +265,19 @@ namespace RestoranMenüSiparisMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Ingredient")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MealPic")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("Price")
+                    b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("Unit")
                         .HasColumnType("int");

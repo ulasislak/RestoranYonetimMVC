@@ -1,0 +1,142 @@
+﻿@using RestoranMenüSiparisMVC.Data
+@model List<ProductViewModel>
+@{
+    Layout = "~/Areas/Costumer/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menü</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff; /* Beyaz arka plan */
+            font-family: Arial, sans-serif;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .menu-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0; /* Hafif gri kenarlık */
+        }
+
+            .menu-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3); /* Turuncu gölge */
+            }
+
+        .menu-title {
+            color: #d32f2f; /* Kırmızı renk */
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .menu-details {
+            color: #555;
+        }
+
+        .menu-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+            .quantity-control button {
+                background-color: #fd7e14; /* Turuncu renk */
+                border: none;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .quantity-control button:hover {
+                    background-color: #e76e00; /* Koyu turuncu */
+                }
+
+            .quantity-control input {
+                width: 50px;
+                text-align: center;
+                margin: 0 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 5px;
+            }
+
+        .btn-order {
+            background-color: #d32f2f; /* Kırmızı renk */
+            border-color: #d32f2f;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+            .btn-order:hover {
+                background-color: #c82333; /* Koyu kırmızı */
+                border-color: #bd2130;
+            }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1 class="text-center mb-4" style="color: #d32f2f;">Menü</h1>
+        @foreach (var menu in Model)
+        {
+            <div class="menu-card">
+                <img src="@menu.MealPic" alt="@menu.Name" class="menu-image" />
+                <h3 class="menu-title">@menu.Name</h3>
+                <p class="menu-details"><strong>İçindekiler:</strong> @menu.Ingredient</p>
+                <p class="menu-details"><strong>Fiyat:</strong> @menu.Price.ToString("C")</p>
+                <form asp-action="CreateOrder" method="post">
+                    <input type="hidden" name="id" value="@menu.Id" />
+                    <div class="quantity-control">
+                        <button type="button" onclick="decreaseQuantity('quantity-@menu.Id')">-</button>
+                        <input type="number" id="quantity-@menu.Id" name="quantity" value="1" min="1" />
+                        <button type="button" onclick="increaseQuantity('quantity-@menu.Id')">+</button>
+                    </div>
+                    <button type="submit" class="btn btn-order">Sipariş Ver</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript Fonksiyonları -->
+    <script>
+        function increaseQuantity(inputId) {
+            const input = document.getElementById(inputId);
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decreaseQuantity(inputId) {
+            const input = document.getElementById(inputId);
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+    </script>
+</body>
+</html>

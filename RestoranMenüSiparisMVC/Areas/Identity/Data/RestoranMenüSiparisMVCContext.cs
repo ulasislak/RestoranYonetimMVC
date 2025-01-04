@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RestoranMenüSiparisMVC.Areas.Identity.Data;
+using RestoranMenüSiparisMVC.Models;
 
 namespace RestoranMenüSiparisMVC.Data;
 
 public class RestoranMenüSiparisMVCContext : IdentityDbContext<RestoranMenüSiparisMVCUser>
 {
     public DbSet<ProductViewModel> Products { get; set; }
+    public DbSet<OrdersDetailsViewModel> Orders { get; set; }
     public RestoranMenüSiparisMVCContext(DbContextOptions<RestoranMenüSiparisMVCContext> options)
         : base(options)
     {

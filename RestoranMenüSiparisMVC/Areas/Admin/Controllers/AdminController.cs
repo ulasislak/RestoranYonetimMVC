@@ -33,7 +33,35 @@ namespace RestoranMenüSiparisMVC.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]   
+        public IActionResult ListMenu()
+        {
+            var menuList=_context.Products.ToList();
+            return View(menuList);
+        }       
 
+        [HttpGet]
+        public IActionResult UpdateMenu(int Id) 
+        {
+            var GetById= _context.Products.FirstOrDefault(x => x.Id == Id);
+            return View(GetById);  
+        }
 
+        [HttpPost]
+        public IActionResult UpdateMenu(ProductViewModel productViewModel)
+        {
+            _context.Products.Update(productViewModel);
+            _context.SaveChanges();
+            return RedirectToAction("ListMenu");  
+        }
+
+        [HttpPost]
+        public IActionResult DeleteMenu(int Id) 
+        {
+            var DeleteById= _context.Products.FirstOrDefault(y => y.Id == Id);
+            _context.Products.Remove(DeleteById);
+            _context.SaveChanges();
+            return RedirectToAction("ListMenu");
+        }
     }
 }
