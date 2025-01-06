@@ -89,5 +89,60 @@ namespace RestoranMenüSiparisMVC.Areas.Customer.Controllers
             return View(orders); 
         }
 
+        [HttpGet]
+        public IActionResult UpdateOrder(int Id)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.Id == Id);
+            if (order == null)
+            {
+                return NotFound("Sipariş bulunamadı.");
+            }
+
+            var product = _context.Products.FirstOrDefault(p => p.Id == order.ProductId);
+            if (product == null)
+            {
+                return NotFound("Ürün bulunamadı.");
+            }
+
+            var model = new OrdersDetailsViewModel
+            {
+                Id = order.Id,
+                Name = product.Name,
+                Ingredient = product.Ingredient,
+                Price = product.Price,
+                Unit = order.Quantity,
+                MealPic = product.MealPic
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateOrder(OrdersDetailsViewModel model)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.Id == model.Id);
+            if (order == null)
+            {
+                return NotFound("Sipariş bulunamadı.");
+            }
+
+            order.Quantity = model.Quantity;
+            order.TotalPrice = (decimal)(model.Price * model.Quantity);
+
+            _context.Orders.Update(order);
+            _context.SaveChanges();
+
+            return RedirectToAction("ListOrder");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteOrder(int id)
+        {
+            var order = _context.Orders.FirstOrDefault(x => x.Id == id);
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+            return RedirectToAction("ListOrder");
+        }
     }
 }

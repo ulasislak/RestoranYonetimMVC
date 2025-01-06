@@ -1,7 +1,7 @@
 ﻿@using RestoranMenüSiparisMVC.Models
 @model List<OrdersDetailsViewModel>
 @{
-    Layout = "~/Areas/Costumer/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -92,7 +92,7 @@
                     <p class="order-details"><strong>İçindekiler:</strong> @order.Ingredient</p>
                     <p class="order-details"><strong>Fiyat:</strong> @order.TotalPrice</p>
                     <p class="order-details"><strong>Adet:</strong> @order.Unit</p>
-                    <a asp-action="UpdateOrder" asp-route-id="@order.Id" class="btn btn-update">Güncelle</a>
+                   
                     <form asp-action="DeleteOrder" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="@order.Id" />
                         <button type="submit" class="btn btn-delete">Sil</button>

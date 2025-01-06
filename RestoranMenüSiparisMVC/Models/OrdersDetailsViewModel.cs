@@ -10,8 +10,8 @@
         public string? MealPic { get; set; }
         public int? ProductId { get; set; } 
         public string? CustomerId { get; set; } 
-        public int? Quantity { get; set; } 
-        public DateTime OrderDate { get; set; } 
+        public int? Quantity { get; set; }
+        public DateTime? OrderDate { get; set; }=DateTime.Now;
         public decimal? TotalPrice { get; set; }
     }
 }

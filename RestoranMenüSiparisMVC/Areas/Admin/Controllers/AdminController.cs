@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestoranMenüSiparisMVC.Data;
+using RestoranMenüSiparisMVC.Models;
+using System.Security.Claims;
 
 namespace RestoranMenüSiparisMVC.Areas.Admin.Controllers
 {
@@ -62,6 +64,23 @@ namespace RestoranMenüSiparisMVC.Areas.Admin.Controllers
             _context.Products.Remove(DeleteById);
             _context.SaveChanges();
             return RedirectToAction("ListMenu");
+        }
+
+        [HttpGet]
+        public IActionResult ListOrder()
+        {
+            var orders = _context.Orders.ToList();               
+
+            return View(orders);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteOrder(int Id) 
+        {
+            var order= _context.Orders.FirstOrDefault(x => x.Id == Id);
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+            return RedirectToAction("ListOrder");
         }
     }
 }
