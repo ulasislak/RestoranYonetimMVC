@@ -3,16 +3,73 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RestoranMenüSiparisMVC</title>
+    <title>@ViewData["Title"] - HamBurger</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RestoranMenüSiparisMVC.styles.css" asp-append-version="true" />
+    <style>
+        /* Özel Stil */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #dc3545; /* Kırmızı renk */
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+            .nav-link:hover {
+                color: #fd7e14 !important; /* Turuncu renk */
+            }
+
+        .btn-custom {
+            background-color: #fd7e14; /* Turuncu renk */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 0 5px; /* Butonlar arası boşluk */
+        }
+
+            .btn-custom:hover {
+                background-color: #e76e00; /* Koyu turuncu */
+            }
+
+        .footer {
+            background-color: #dc3545; /* Kırmızı renk */
+            color: white;
+        }
+
+            .footer a {
+                color: #fd7e14; /* Turuncu renk */
+                text-decoration: none;
+            }
+
+                .footer a:hover {
+                    color: #e76e00; /* Koyu turuncu */
+                }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row; /* Butonları yan yana yerleştir */
+            align-items: center;
+        }
+
+        .nav-item {
+            margin: 0 5px; /* Butonlar arası boşluk */
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RestoranMenüSiparisMVC</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HamBurger</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,12 +77,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Costumer" asp-controller="Customer" asp-action="ListMenu">Menu</a>
+                            <a class="nav-link btn-custom" asp-area="Costumer" asp-controller="Costumer" asp-action="ListMenu">Menu</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link text-dark" asp-area="Costumer" asp-controller="Costumer" asp-action="ListOrder">Orders</a>
-                        </li> 
-
+                            <a class="nav-link btn-custom" asp-area="Costumer" asp-controller="Costumer" asp-action="ListOrder">Orders</a>
+                        </li>
                     </ul>
                 </div>
             </div>

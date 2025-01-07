@@ -1,8 +1,140 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "HamBurger - Lezzetin Adresi";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        
+
+        /* Footer */
+        .footer {
+            background-color: #d32f2f; /* Kırmızı renk */
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: auto;
+        }
+
+        /* Hamburger ikonları için stil */
+        .hamburger-icon {
+            position: absolute;
+            font-size: 24px;
+            color: #ffcc80; /* Turuncu renk */
+            opacity: 0.3;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        /* Hamburger ikonları için animasyon */
+        .keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* İçerik kutusu */
+        .welcome-container {
+            background-color: #ffffff; /* Beyaz arka plan */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            width: 90%;
+            margin: 2rem auto;
+        }
+
+        .welcome-header {
+            color: #d32f2f; /* Kırmızı renk */
+            font-size: 3rem;
+            font-weight: bold;//
+            margin-top: 0;
+        }
+
+        .welcome-text {
+            color: #e64a19; /* Koyu turuncu renk */
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .welcome-link {
+            color: #d32f2f; /* Kırmızı renk */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .welcome-link:hover {
+            color: #e64a19; /* Koyu turuncu renk */
+            text-decoration: underline;
+        }
+
+        .burger-img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #d32f2f; /* Kırmızı renk */
+            border-color: #d32f2f;
+        }
+
+        .btn-primary:hover {
+            background-color: #e64a19; /* Koyu turuncu renk */
+            border-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+   
+
+    <!-- Hamburger ikonları -->
+    <div id="hamburger-icons"></div>
+
+    <!-- Ana İçerik -->
+    <div class="welcome-container">
+        <h1 class="welcome-header">HamBurger'e Hoş Geldiniz!</h1>
+        <p class="welcome-text">Lezzetin adresi HamBurger'da! Birbirinden özel hamburgerlerimizle tanışın.</p>
+        <img src="https://via.placeholder.com/400x200.png?text=HamBurger+Lezzeti" alt="HamBurger" class="burger-img" />
+        <p class="mt-4">
+            <a class="btn btn-primary btn-lg" href="/Menu">Menüyü Görüntülemek Icin Kayit Olun veya Giris Yapin.</a>
+        </p>
+        <p class="mt-3">
+            <a class="welcome-link" href="/Hakkimizda">Hakkımızda</a> | 
+            <a class="welcome-link" href="/Iletisim">İletişim</a>
+        </p>
+    </div>
+
+    
+    <!-- JavaScript ile hamburger ikonlarını rastgele yerleştirme -->
+    <script>
+        const hamburgerIconsContainer = document.getElementById('hamburger-icons');
+
+        // 300 tane hamburger ikonu oluştur
+        for (let i = 0; i < 300; i++) {
+            const icon = document.createElement('div');
+            icon.className = 'hamburger-icon';
+            icon.innerHTML = '🍔';
+
+            // Rastgele konum ve boyut ayarla
+            icon.style.top = `${Math.random() * 100}vh`;
+            icon.style.left = `${Math.random() * 100}vw`;
+            icon.style.fontSize = `${Math.floor(Math.random() * 24 + 12)}px`; // 12px - 36px arası
+            icon.style.animationDelay = `${Math.random() * 5}s`; // Animasyon gecikmesi
+
+            hamburgerIconsContainer.appendChild(icon);
+        }
+    </script>
+</body>
+</html>

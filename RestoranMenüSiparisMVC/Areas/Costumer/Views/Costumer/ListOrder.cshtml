@@ -2,6 +2,7 @@
 @model List<OrdersDetailsViewModel>
 @{
     Layout = "~/Areas/Costumer/Shared/_Layout.cshtml";
+   
 }
 
 <!DOCTYPE html>
@@ -55,22 +56,30 @@
             margin-bottom: 10px;
         }
 
-        btn-update {
+        .btn-update {
             background-color: #fd7e14; /* Turuncu renk */
             border-color: #fd7e14;
-            color: #e76e00;
+            color: white; /* Metin rengi beyaz */
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
             margin-right: 10px;
         }
 
-        .btn-update:hover {
-            background-color: #e76e00; /* Koyu turuncu */
-            border-color: #e76e00;
-        }
+            .btn-update:hover {
+                background-color: #e76e00; /* Koyu turuncu */
+                border-color: #e76e00;
+            }
 
         .btn-delete {
             background-color: #dc3545; /* Kırmızı renk */
             border-color: #dc3545;
             color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
 
             .btn-delete:hover {
@@ -91,7 +100,7 @@
                     <h3 class="order-title">@order.Name</h3>
                     <p class="order-details"><strong>İçindekiler:</strong> @order.Ingredient</p>
                     <p class="order-details"><strong>Fiyat:</strong> @order.TotalPrice</p>
-                    <p class="order-details"><strong>Adet:</strong> @order.Unit</p>
+                    <p class="order-details"><strong>Adet:</strong> @order.Quantity</p>
                     <a asp-action="UpdateOrder" asp-route-id="@order.Id" class="btn btn-update">Güncelle</a>
                     <form asp-action="DeleteOrder" method="post" style="display: inline;">
                         <input type="hidden" name="id" value="@order.Id" />
